@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ExternalLink, Github, Lock, Code, Shield, Globe, 
-  Database, Server, Eye, Folder, FolderOpen 
+  ExternalLink, Github, Lock, Code, Shield, Globe, Server, Eye, Folder, FolderOpen 
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,53 +24,53 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'SecureAuth Dashboard',
+    title: 'TutorHub',
     description: 'Dashboard d\'administration avec authentification multi-facteurs, gestion des rôles et audit de sécurité intégré.',
     category: 'fullstack',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'JWT', '2FA'],
-    github: 'https://github.com',
+    tech: ['React', 'Next js', 'Spring', 'PostgreSQL', 'JWT', 'Docker'],
+    github: 'https://github.com/JedidiaDev/TutorHub',
     demo: 'https://demo.com',
     featured: true,
-    securityFocus: true,
+    // securityFocus: true,
   },
-  {
-    id: 2,
-    title: 'VulnScanner Tool',
-    description: 'Outil de scan de vulnérabilités web automatisé. Détecte les failles XSS, SQL Injection, CSRF et plus.',
-    category: 'security',
-    tech: ['Python', 'Burp Suite API', 'OWASP ZAP', 'Docker'],
-    github: 'https://github.com',
-    featured: true,
-    securityFocus: true,
-  },
-  {
-    id: 3,
-    title: 'CryptoWallet UI',
-    description: 'Interface utilisateur moderne pour une application de portefeuille crypto avec animations fluides.',
-    category: 'frontend',
-    tech: ['React', 'Framer Motion', 'Tailwind', 'Web3.js'],
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-  },
-  {
-    id: 4,
-    title: 'API Gateway Sécurisé',
-    description: 'Gateway API avec rate limiting, authentification OAuth2, et logging de sécurité avancé.',
-    category: 'fullstack',
-    tech: ['Node.js', 'Express', 'Redis', 'OAuth2', 'Winston'],
-    github: 'https://github.com',
-    securityFocus: true,
-  },
-  {
-    id: 5,
-    title: 'Network Monitor',
-    description: 'Application de monitoring réseau en temps réel avec détection d\'anomalies et alertes.',
-    category: 'security',
-    tech: ['Python', 'Scapy', 'React', 'WebSocket', 'InfluxDB'],
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-    securityFocus: true,
-  },
+//   {
+//     id: 2,
+//     title: 'VulnScanner Tool',
+//     description: 'Outil de scan de vulnérabilités web automatisé. Détecte les failles XSS, SQL Injection, CSRF et plus.',
+//     category: 'security',
+//     tech: ['Python', 'Burp Suite API', 'OWASP ZAP', 'Docker'],
+//     github: 'https://github.com',
+//     featured: true,
+//     securityFocus: true,
+//   },
+//   {
+//     id: 3,
+//     title: 'CryptoWallet UI',
+//     description: 'Interface utilisateur moderne pour une application de portefeuille crypto avec animations fluides.',
+//     category: 'frontend',
+//     tech: ['React', 'Framer Motion', 'Tailwind', 'Web3.js'],
+//     github: 'https://github.com',
+//     demo: 'https://demo.com',
+//   },
+//   {
+//     id: 4,
+//     title: 'API Gateway Sécurisé',
+//     description: 'Gateway API avec rate limiting, authentification OAuth2, et logging de sécurité avancé.',
+//     category: 'fullstack',
+//     tech: ['Node.js', 'Express', 'Redis', 'OAuth2', 'Winston'],
+//     github: 'https://github.com',
+//     securityFocus: true,
+//   },
+// //   {
+//     id: 5,
+//     title: 'Network Monitor',
+//     description: 'Application de monitoring réseau en temps réel avec détection d\'anomalies et alertes.',
+//     category: 'security',
+//     tech: ['Python', 'Scapy', 'React', 'WebSocket', 'InfluxDB'],
+//     github: 'https://github.com',
+//     demo: 'https://demo.com',
+//     securityFocus: true,
+//   },
   {
     id: 6,
     title: 'Portfolio Terminal',
@@ -79,6 +78,15 @@ const projects: Project[] = [
     category: 'frontend',
     tech: ['React', 'TypeScript', 'Framer Motion', 'Tailwind'],
     github: 'https://github.com',
+    featured: true,
+  },
+  {
+    id: 7,
+    title: 'Snake Game',
+    description: 'Jeu du serpent minimaliste jouable sur pc',
+    category: 'frontend',
+    tech: ['C', 'SDL2', 'Makefile'],
+    github: 'https://github.com/JedidiaDev/Snake-Game',
     featured: true,
   },
 ];
@@ -285,11 +293,11 @@ export function Projects() {
               <p className="text-muted-foreground">
                 <span className="text-primary">$</span> git log --oneline | wc -l
               </p>
-              <p className="text-primary text-2xl">500+ commits</p>
+              <p className="text-primary text-2xl">60+ commits</p>
               <p className="text-muted-foreground">
                 <span className="text-primary">$</span> find . -name "*.tsx" | wc -l
               </p>
-              <p className="text-accent text-2xl">150+ composants</p>
+              <p className="text-accent text-2xl">50+ composants</p>
             </div>
           </div>
         </motion.div>

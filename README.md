@@ -1,73 +1,223 @@
-# React + TypeScript + Vite
+# 🛡️ Portfolio - Développeur Full Stack & Ethical Hacker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*Un portfolio moderne avec un thème cybersecurity/hacker, des animations fluides et un curseur personnalisé.*
 
-## React Compiler
+[🚀 Démo Live](#) • [📧 Contact](#contact)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📸 Aperçu
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+┌──────────────────────────────────────────────────────────────┐
+│  ███████╗██╗   ██╗██╗     ██╗         ███████╗████████╗ █████╗ ██████╗██╗  ██╗  │
+│  ██╔════╝██║   ██║██║     ██║         ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝  │
+│  █████╗  ██║   ██║██║     ██║         ███████╗   ██║   ███████║██║     █████╔╝   │
+│  ██╔══╝  ██║   ██║██║     ██║         ╚════██║   ██║   ██╔══██║██║     ██╔═██╗   │
+│  ██║     ╚██████╔╝███████╗███████╗    ███████║   ██║   ██║  ██║╚██████╗██║  ██╗  │
+│  ╚═╝      ╚═════╝ ╚══════╝╚══════╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝  │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ✨ Fonctionnalités
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🎨 Design & Thème
+- **Thème Cyberpunk/Hacker** - Palette de couleurs sombres avec accents néon verts
+- **Style Terminal** - Interface inspirée des terminaux Linux avec police monospace
+- **Effets Visuels** - Grille cyber, effets néon glow, scanlines
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🖱️ Curseur Personnalisé
+- Curseur en forme de crosshair avec cercle rotatif animé
+- Effet de traînée avec particules lumineuses
+- Animation d'onde au clic
+- Changement d'apparence au survol des éléments interactifs
+
+### 🎬 Animations
+- **Matrix Rain** - Effet de pluie de caractères en arrière-plan
+- **Glitch Effect** - Textes avec effet de distorsion aléatoire
+- **Typing Effect** - Animation de frappe pour les rôles
+- **Scroll Animations** - Apparitions fluides au défilement
+- **Skill Bars** - Barres de progression animées
+
+### 📄 Sections
+| Section | Description |
+|---------|-------------|
+| **Home** | Hero avec terminal animé, nom en glitch et statistiques |
+| **About** | Bio, timeline de parcours et compétences techniques |
+| **Projects** | Galerie filtrable avec cartes interactives |
+| **Contact** | Formulaire style terminal et liens sociaux |
+
+## 🛠️ Technologies
+
+```bash
+$ cat ./tech_stack.json
 ```
+
+```json
+{
+  "frontend": {
+    "framework": "React 19",
+    "language": "TypeScript 5.9",
+    "styling": "Tailwind CSS 4.1",
+    "components": "shadcn/ui",
+    "animations": "Framer Motion"
+  },
+  "build": {
+    "bundler": "Vite 7.3",
+    "package_manager": "npm"
+  },
+  "design": {
+    "icons": "Lucide React",
+    "fonts": ["JetBrains Mono", "Fira Code"]
+  }
+}
+```
+
+## 🚀 Installation
+
+```bash
+# Cloner le repository
+$ git clone https://github.com/JedidiaDev/portfolio.git
+
+# Accéder au dossier
+$ cd portfolio
+
+# Installer les dépendances
+$ npm install
+
+# Lancer le serveur de développement
+$ npm run dev
+```
+
+Le site sera accessible sur `http://localhost:5173`
+
+## 📦 Scripts Disponibles
+
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | Lance le serveur de développement |
+| `npm run build` | Compile le projet pour la production |
+| `npm run preview` | Prévisualise le build de production |
+| `npm run lint` | Vérifie le code avec ESLint |
+
+## 📁 Structure du Projet
+
+```
+portfolio/
+├── public/                 # Assets statiques
+├── src/
+│   ├── assets/            # Images et ressources
+│   ├── components/        # Composants React
+│   │   ├── ui/           # Composants shadcn/ui
+│   │   ├── CustomCursor.tsx
+│   │   ├── MatrixRain.tsx
+│   │   ├── GlitchText.tsx
+│   │   ├── TypingEffect.tsx
+│   │   ├── header.tsx
+│   │   └── footer.tsx
+│   ├── lib/              # Utilitaires
+│   ├── pages/            # Pages du portfolio
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   ├── Projects.tsx
+│   │   └── Contact.tsx
+│   ├── App.tsx           # Composant principal
+│   ├── App.css           # Styles globaux
+│   ├── index.css         # Configuration Tailwind
+│   └── main.tsx          # Point d'entrée
+├── components.json        # Configuration shadcn/ui
+├── tailwind.config.js     # Configuration Tailwind
+├── vite.config.ts         # Configuration Vite
+└── package.json
+```
+
+## ⚙️ Personnalisation
+
+### Modifier les informations personnelles
+
+1. **Nom et rôles** → `src/pages/Home.tsx`
+2. **Bio et compétences** → `src/pages/About.tsx`
+3. **Projets** → `src/pages/Projects.tsx`
+4. **Liens sociaux** → `src/pages/Contact.tsx` et `src/components/footer.tsx`
+
+### Modifier le thème
+
+Les variables de couleur sont définies dans `src/index.css` :
+
+```css
+:root {
+  --primary: oklch(0.75 0.25 145);      /* Vert néon */
+  --accent: oklch(0.6 0.2 180);          /* Cyan */
+  --background: oklch(0.08 0.01 150);    /* Fond sombre */
+  /* ... */
+}
+```
+
+## 🔧 Configuration
+
+### Ajouter des composants shadcn/ui
+
+```bash
+$ npx shadcn@latest add [component-name]
+```
+
+### Variables d'environnement
+
+Créez un fichier `.env.local` pour les variables sensibles :
+
+```env
+VITE_CONTACT_EMAIL=your@email.com
+VITE_GITHUB_URL=https://github.com/username
+```
+
+## 📱 Responsive Design
+
+Le portfolio est entièrement responsive et optimisé pour :
+- 📱 Mobile (< 768px)
+- 📱 Tablette (768px - 1024px)
+- 💻 Desktop (> 1024px)
+
+## 🎯 Performance
+
+- ⚡ Lazy loading des images
+- 🗜️ Code splitting automatique avec Vite
+- 🎨 CSS optimisé avec Tailwind
+- 🔄 Animations GPU-accelerated
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 🤝 Contact
+
+<div align="center">
+
+**Développeur Full Stack & Ethical Hacker**
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](#)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](#)
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](#)
+
+</div>
+
+---
+
+<div align="center">
+
+```
+$ echo "Hack the planet! 🌍"
+```
+
+Made with ❤️ and lots of ☕
+
+</div>
+

@@ -11,24 +11,24 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'contact@example.com',
-    href: 'mailto:contact@example.com',
+    value: 'jedidiakamdemsouop@gmail.com',
+    href: 'mailto:jedidiakamdemsouop@gmail.com',
   },
   {
     icon: MapPin,
     label: 'Localisation',
-    value: 'Paris, France',
+    value: 'Yaoundé, Cameroun',
   },
   {
     icon: Phone,
     label: 'Téléphone',
-    value: '+33 6 XX XX XX XX',
-    href: 'tel:+33600000000',
+    value: '+237 6 96 19 51 72',
+    href: 'tel:+237696195172',
   },
 ];
 
 const socialLinks = [
-  { icon: Github, label: 'GitHub', href: 'https://github.com', username: '@username' },
+  { icon: Github, label: 'GitHub', href: 'https://github.com', username: '@JedidiaDev' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', username: '/in/username' },
   { icon: Twitter, label: 'Twitter', href: 'https://twitter.com', username: '@username' },
 ];

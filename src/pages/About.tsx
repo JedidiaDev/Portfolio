@@ -14,11 +14,12 @@ const skills = {
     { name: 'Vue.js', level: 70 },
   ],
   backend: [
-    { name: 'Node.js', level: 88 },
-    { name: 'Python', level: 85 },
+    { name: 'Java', level: 88 },
+    { name: 'Node.js', level: 85 },
+    { name: 'PHP', level: 85 },
     { name: 'PostgreSQL', level: 80 },
-    { name: 'MongoDB', level: 75 },
-    { name: 'Docker', level: 70 },
+    // { name: 'MongoDB', level: 75 },
+    { name: 'Docker', level: 80 },
   ],
   security: [
     { name: 'Pentesting', level: 75 },
@@ -46,17 +47,17 @@ const techIcons = [
 
 const timeline = [
   {
-    year: '2024',
+    year: '2025',
     title: 'Apprenti Hacker Éthique',
     description: 'Début de ma formation en cybersécurité et ethical hacking',
   },
   {
-    year: '2023',
+    year: '2024',
     title: 'Développeur Full Stack',
     description: 'Maîtrise des technologies modernes du web',
   },
   {
-    year: '2022',
+    year: '2023',
     title: 'Premiers Projets',
     description: 'Création de mes premières applications web',
   },

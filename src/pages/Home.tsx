@@ -12,9 +12,9 @@ const roles = [
 ];
 
 const stats = [
-  { icon: Code, label: 'Projets', value: '20+' },
-  { icon: Shield, label: 'Audits Sécurité', value: '15+' },
-  { icon: Zap, label: 'Technologies', value: '25+' },
+  { icon: Code, label: 'Projets', value: '05+' },
+  { icon: Shield, label: 'Audits Sécurité', value: '05+' },
+  { icon: Zap, label: 'Technologies', value: '15+' },
 ];
 
 export function Home() {
@@ -65,7 +65,7 @@ export function Home() {
               <span className="text-muted-foreground">Salut, je suis</span>
               <br />
               <GlitchText
-                text="[Votre Nom]"
+                text="Jedidia Kamdem Souop"
                 className="text-primary neon-glow"
                 as="span"
               />

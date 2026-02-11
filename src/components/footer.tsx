@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, Terminal, Heart, Instagram } from 'lucide-react';
 
 const socialLinks = [
-  { name: 'GitHub', icon: Github, href: 'https://github.com' },
+  { name: 'GitHub', icon: Github, href: 'https://github.com/JedidiaDev' },
   { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
-  { name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
-  { name: 'Email', icon: Mail, href: 'mailto:contact@example.com' },
-  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com' },
+//   { name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
+  { name: 'Email', icon: Mail, href: 'mailto:jedidiakamdemsouop@gmail.com' },
+  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/kamdemjedidia' },
 ];
 
 export function Footer() {
