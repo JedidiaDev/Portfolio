@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Terminal, Shield } from 'lucide-react';
+import { Menu, X, Terminal, Shield, FileText } from 'lucide-react';
 import { Button } from './ui/button';
+import { useCVModalContext } from '@/contexts/CVModalContext';
 
 const navItems = [
   { name: 'Accueil', href: '#home', icon: '~' },
@@ -14,6 +15,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const { open: openCVModal } = useCVModalContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,11 +123,22 @@ export function Header() {
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
+              className="flex items-center gap-2 ml-4"
             >
+              <Button
+                variant="ghost"
+                size="sm"
+                className="border border-accent/50 text-accent hover:bg-accent/10 hover:border-accent interactive"
+                onClick={openCVModal}
+                disabled
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                CV
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="ml-4 border-primary text-primary hover:bg-primary hover:text-primary-foreground interactive"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground interactive"
                 onClick={() => scrollToSection('#contact')}
               >
                 <Terminal className="w-4 h-4 mr-2" />
@@ -148,22 +161,19 @@ export function Header() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-primary/20"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+              className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-primary/20 overflow-hidden z-50"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
             >
               <div className="container mx-auto px-6 py-4 space-y-2">
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.name}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    }}
-                    className={`block px-4 py-3 font-mono rounded-lg transition-colors interactive ${
+                    type="button"
+                    onClick={() => scrollToSection(item.href)}
+                    className={`block w-full text-left px-4 py-3 font-mono rounded-lg transition-colors interactive ${
                       activeSection === item.href.replace('#', '')
                         ? 'bg-primary/10 text-primary'
                         : 'text-muted-foreground hover:bg-primary/5 hover:text-primary'
@@ -174,8 +184,25 @@ export function Header() {
                   >
                     <span className="text-primary/50">{item.icon}/</span>
                     {item.name}
-                  </motion.a>
+                  </motion.button>
                 ))}
+                
+                {/* CV Button Mobile */}
+                <motion.button
+                  type="button"
+                  onClick={() => {
+                    openCVModal();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  disabled
+                  className="flex items-center gap-2 w-full px-4 py-3 font-mono rounded-lg text-accent hover:bg-accent/10 transition-colors interactive "
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navItems.length * 0.05 }}
+                >
+                  <FileText className="w-4 h-4" />
+                  Voir mon CV
+                </motion.button>
               </div>
             </motion.div>
           )}

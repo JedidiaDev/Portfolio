@@ -77,7 +77,7 @@ const projects: Project[] = [
     description: 'Ce portfolio avec thème hacker, animations cyberpunk et curseur personnalisé.',
     category: 'frontend',
     tech: ['React', 'TypeScript', 'Framer Motion', 'Tailwind'],
-    github: 'https://github.com',
+    github: 'https://github.com/JedidiaDev/Portfolio',
     featured: true,
   },
   {

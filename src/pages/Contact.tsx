@@ -23,12 +23,12 @@ const contactInfo = [
     icon: Phone,
     label: 'Téléphone',
     value: '+237 6 96 19 51 72',
-    href: 'tel:+237696195172',
+    href: 'https://wa.me/237696195172?text=Hello%2C%20J\'ai%20visité%20ton%20site%20et%20je%20voudrais%20discuter',
   },
 ];
 
 const socialLinks = [
-  { icon: Github, label: 'GitHub', href: 'https://github.com', username: '@JedidiaDev' },
+  { icon: Github, label: 'GitHub', href: 'https://github.com/JedidiaDev', username: '@JedidiaDev' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', username: '/in/username' },
   { icon: Twitter, label: 'Twitter', href: 'https://twitter.com', username: '@username' },
 ];
@@ -68,58 +68,59 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 cyber-grid opacity-20" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/4 w-48 md:w-96 h-48 md:h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-48 md:w-96 h-48 md:h-96 bg-accent/5 rounded-full blur-3xl" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <div className="inline-block font-mono text-sm text-muted-foreground mb-4">
+          <div className="inline-block font-mono text-xs sm:text-sm text-muted-foreground mb-4">
             <span className="text-primary">$</span> ./send_message.sh
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
             <span className="text-primary">#</span> Me Contacter
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto px-4">
             Une idée de projet ? Une collaboration ? N'hésitez pas à me contacter !
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="w-full"
           >
             <Card className="terminal-box relative overflow-hidden">
-              <CardHeader>
+              <CardHeader className="p-4 sm:p-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="text-muted-foreground text-sm font-mono ml-4">
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500" />
+                  <span className="text-muted-foreground text-xs sm:text-sm font-mono ml-2 sm:ml-4 truncate">
                     ~/contact/form.sh
                   </span>
                 </div>
-                <CardTitle className="font-mono text-primary flex items-center gap-2">
-                  <Terminal className="w-5 h-5" />
+                <CardTitle className="font-mono text-primary flex items-center gap-2 text-base sm:text-lg">
+                  <Terminal className="w-4 h-4 sm:w-5 sm:h-5" />
                   Envoyer un message
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   {/* Name field */}
                   <div className="space-y-2">
-                    <label className="font-mono text-sm text-muted-foreground">
+                    <label className="font-mono text-xs sm:text-sm text-muted-foreground">
                       <span className="text-primary">$</span> echo $NAME
                     </label>
                     <motion.input
@@ -130,7 +131,7 @@ export function Contact() {
                       onFocus={() => setFocusedField('name')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      className="w-full px-4 py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors interactive"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors interactive"
                       placeholder="Votre nom..."
                       animate={{
                         borderColor: focusedField === 'name' ? 'var(--primary)' : undefined,
@@ -141,7 +142,7 @@ export function Contact() {
 
                   {/* Email field */}
                   <div className="space-y-2">
-                    <label className="font-mono text-sm text-muted-foreground">
+                    <label className="font-mono text-xs sm:text-sm text-muted-foreground">
                       <span className="text-primary">$</span> echo $EMAIL
                     </label>
                     <motion.input
@@ -152,7 +153,7 @@ export function Contact() {
                       onFocus={() => setFocusedField('email')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      className="w-full px-4 py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors interactive"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors interactive"
                       placeholder="votre@email.com"
                       animate={{
                         borderColor: focusedField === 'email' ? 'var(--primary)' : undefined,
@@ -163,7 +164,7 @@ export function Contact() {
 
                   {/* Subject field */}
                   <div className="space-y-2">
-                    <label className="font-mono text-sm text-muted-foreground">
+                    <label className="font-mono text-xs sm:text-sm text-muted-foreground">
                       <span className="text-primary">$</span> echo $SUBJECT
                     </label>
                     <motion.input
@@ -174,7 +175,7 @@ export function Contact() {
                       onFocus={() => setFocusedField('subject')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      className="w-full px-4 py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors interactive"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors interactive"
                       placeholder="Sujet du message..."
                       animate={{
                         borderColor: focusedField === 'subject' ? 'var(--primary)' : undefined,
@@ -185,7 +186,7 @@ export function Contact() {
 
                   {/* Message field */}
                   <div className="space-y-2">
-                    <label className="font-mono text-sm text-muted-foreground">
+                    <label className="font-mono text-xs sm:text-sm text-muted-foreground">
                       <span className="text-primary">$</span> cat {">"} message.txt
                     </label>
                     <motion.textarea
@@ -195,8 +196,8 @@ export function Contact() {
                       onFocus={() => setFocusedField('message')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none interactive"
+                      rows={4}
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/30 border border-primary/20 rounded-lg font-mono text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none interactive"
                       placeholder="Votre message..."
                       animate={{
                         borderColor: focusedField === 'message' ? 'var(--primary)' : undefined,
@@ -250,50 +251,50 @@ export function Contact() {
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6 w-full"
           >
             {/* Contact details */}
             <Card className="bg-card/50 backdrop-blur border-primary/20">
-              <CardHeader>
-                <CardTitle className="font-mono text-base flex items-center gap-2">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="font-mono text-sm sm:text-base flex items-center gap-2">
                   <span className="text-primary">$</span> cat ./contact_info.json
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-3 sm:space-y-4">
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={info.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
                     {info.href ? (
                       <a
                         href={info.href}
-                        className="flex items-center gap-4 p-3 rounded-lg hover:bg-primary/5 transition-colors group interactive"
+                        className="flex items-center gap-3 sm:gap-4 p-2 sm:p-3 rounded-lg hover:bg-primary/5 transition-colors group interactive"
                       >
-                        <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                          <info.icon className="w-5 h-5" />
+                        <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors shrink-0">
+                          <info.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground font-mono">{info.label}</p>
-                          <p className="text-foreground group-hover:text-primary transition-colors">
+                        <div className="min-w-0">
+                          <p className="text-xs sm:text-sm text-muted-foreground font-mono">{info.label}</p>
+                          <p className="text-sm sm:text-base text-foreground group-hover:text-primary transition-colors truncate">
                             {info.value}
                           </p>
                         </div>
                       </a>
                     ) : (
-                      <div className="flex items-center gap-4 p-3">
-                        <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                          <info.icon className="w-5 h-5" />
+                      <div className="flex items-center gap-3 sm:gap-4 p-2 sm:p-3">
+                        <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10 text-primary shrink-0">
+                          <info.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground font-mono">{info.label}</p>
-                          <p className="text-foreground">{info.value}</p>
+                        <div className="min-w-0">
+                          <p className="text-xs sm:text-sm text-muted-foreground font-mono">{info.label}</p>
+                          <p className="text-sm sm:text-base text-foreground truncate">{info.value}</p>
                         </div>
                       </div>
                     )}
@@ -304,39 +305,38 @@ export function Contact() {
 
             {/* Social links */}
             <Card className="bg-card/50 backdrop-blur border-primary/20">
-              <CardHeader>
-                <CardTitle className="font-mono text-base flex items-center gap-2">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="font-mono text-sm sm:text-base flex items-center gap-2">
                   <span className="text-primary">$</span> ls ./social_links/
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-2 sm:space-y-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 5 }}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-primary/5 transition-colors group interactive"
+                    className="flex items-center justify-between p-2 sm:p-3 rounded-lg hover:bg-primary/5 transition-colors group interactive"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="p-2 rounded-lg bg-secondary/50 text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 transition-colors">
-                        <social.icon className="w-5 h-5" />
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                      <div className="p-1.5 sm:p-2 rounded-lg bg-secondary/50 text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 transition-colors shrink-0">
+                        <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <div>
-                        <p className="font-medium text-foreground group-hover:text-primary transition-colors">
+                      <div className="min-w-0">
+                        <p className="text-sm sm:text-base font-medium text-foreground group-hover:text-primary transition-colors">
                           {social.label}
                         </p>
-                        <p className="text-sm text-muted-foreground font-mono">
+                        <p className="text-xs sm:text-sm text-muted-foreground font-mono truncate">
                           {social.username}
                         </p>
                       </div>
                     </div>
-                    <span className="text-muted-foreground group-hover:text-primary transition-colors">→</span>
+                    <span className="text-muted-foreground group-hover:text-primary transition-colors shrink-0">→</span>
                   </motion.a>
                 ))}
               </CardContent>
@@ -347,16 +347,16 @@ export function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-4 rounded-lg border border-primary/30 bg-primary/5 relative overflow-hidden"
+              className="p-3 sm:p-4 rounded-lg border border-primary/30 bg-primary/5 relative overflow-hidden"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <motion.div
-                  className="w-3 h-3 rounded-full bg-green-500"
+                  className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500 shrink-0"
                   animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   style={{ boxShadow: '0 0 10px rgba(34, 197, 94, 0.5)' }}
                 />
-                <span className="font-mono text-sm">
+                <span className="font-mono text-xs sm:text-sm">
                   <span className="text-primary">Status:</span>{' '}
                   <span className="text-green-500">Disponible pour de nouveaux projets</span>
                 </span>

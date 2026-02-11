@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
-import { ChevronDown, Code, Shield, Terminal, Zap } from 'lucide-react';
+import { ChevronDown, Code, Shield, Terminal, Zap, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GlitchText } from '@/components/GlitchText';
 import { TypingEffect } from '@/components/TypingEffect';
+import { useCVModalContext } from '@/contexts/CVModalContext';
 
 const roles = [
   'Développeur Full Stack',
@@ -18,6 +19,8 @@ const stats = [
 ];
 
 export function Home() {
+  const { open: openCVModal } = useCVModalContext();
+
   return (
     <section
       id="home"
@@ -118,6 +121,16 @@ export function Home() {
             <Button
               size="lg"
               variant="outline"
+              className="border-accent text-accent hover:bg-accent/10 interactive group"
+              onClick={openCVModal}
+              disabled
+            >
+              <FileText className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+              Mon CV
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
               className="border-primary text-primary hover:bg-primary/10 interactive"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
@@ -158,7 +171,7 @@ export function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden"
         >
           <motion.button
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}

@@ -1,13 +1,150 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Jedidia Kamdem Souop | Développeur Full Stack & Ethical Hacker</title>
+    <meta name="title" content="Jedidia Kamdem Souop | Développeur Full Stack & Ethical Hacker" />
+    <meta name="description" content="Portfolio de Jedidia Kamdem Souop - Développeur Full Stack passionné et apprenti hacker éthique. Spécialisé en Java, React, Spring, Node.js, TypeScript et cybersécurité." />
+    <meta name="keywords" content="développeur, full stack, ethical hacker, cybersécurité, Java, Spring, React, Node.js, TypeScript, portfolio, Jedidia Kamdem Souop" />
+    <meta name="author" content="Jedidia Kamdem Souop" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#001a00" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jedidiadev.github.io/Portfolio/" />
+    <meta property="og:title" content="Jedidia Kamdem Souop | Développeur Full Stack & Ethical Hacker" />
+    <meta property="og:description" content="Portfolio de Jedidia Kamdem Souop - Développeur Full Stack passionné et apprenti hacker éthique. Spécialisé en Java, React, Spring, Node.js, TypeScript et cybersécurité." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Jedidia Kamdem Souop Portfolio" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://jedidiadev.github.io/Portfolio/" />
+    <meta name="twitter:title" content="Jedidia Kamdem Souop | Développeur Full Stack & Ethical Hacker" />
+    <meta name="twitter:description" content="Portfolio de Jedidia Kamdem Souop - Développeur Full Stack passionné et apprenti hacker éthique." />
+    <meta name="twitter:image" content="/og-image.png" />
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- JetBrains Mono Font -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" 
+      rel="stylesheet" 
+    />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jedidiadev.github.io/Portfolio/" />
+    
+    <style>
+      /* Critical CSS for initial load */
+      html {
+        background-color: #001a00;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #001a00;
+        color: #00ff55;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      /* Loading screen */
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #001a00;
+        z-index: 9999;
+      }
+      .loading-text {
+        font-family: 'JetBrains Mono', monospace;
+        color: #00ff55;
+        font-size: 1.2rem;
+        animation: blink 1s step-end infinite;
+      }
+      .loading-text::after {
+        content: '_';
+        animation: blink 0.7s step-end infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
   </head>
   <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-text">Initializing system</div>
+    </div>
+    
+    <!-- App Root -->
     <div id="root"></div>
+    
+    <!-- Noscript Fallback -->
+    <noscript>
+      <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #001a00;
+        color: #00ff55;
+        font-family: 'JetBrains Mono', monospace;
+        text-align: center;
+        padding: 2rem;
+      ">
+        <h1>⚠️ JavaScript Required</h1>
+        <p>Ce portfolio nécessite JavaScript pour fonctionner correctement.</p>
+        <p>Veuillez activer JavaScript dans votre navigateur.</p>
+        <code style="
+          margin-top: 1rem;
+          padding: 1rem;
+          background: rgba(0, 255, 85, 0.1);
+          border: 1px solid #00ff55;
+          border-radius: 8px;
+        ">
+          $ enable --javascript
+        </code>
+      </div>
+    </noscript>
+    
     <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Hide loading screen when app is ready
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }
+        }, 800);
+      });
+    </script>
   </body>
 </html>
