@@ -1,11 +1,28 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { 
   Send, Mail, MapPin, Phone, Github, Linkedin, 
   Twitter, Terminal, CheckCircle, AlertCircle 
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
+// ============================================
+// CONFIGURATION EMAILJS - À REMPLIR
+// ============================================
+// 1. Crée un compte gratuit sur https://www.emailjs.com/
+// 2. Dans "Email Services", ajoute ton service email (Gmail, etc.)
+// 3. Dans "Email Templates", crée un template avec ces variables:
+//    - {{from_name}} : Nom de l'expéditeur
+//    - {{from_email}} : Email de l'expéditeur  
+//    - {{subject}} : Sujet du message
+//    - {{message}} : Contenu du message
+// 4. Copie tes identifiants ci-dessous:
+const EMAILJS_SERVICE_ID = 'service_lzni7o5';  // Ex: 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'template_t4kt17n'; // Ex: 'template_xyz789'
+const EMAILJS_PUBLIC_KEY = '1Kv11eqk0JHxXlurv';   // Ex: 'AbCdEfGhIjKlMnOp'
+// ============================================
 
 const contactInfo = [
   {
@@ -36,6 +53,7 @@ const socialLinks = [
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,24 +65,42 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formRef.current) return;
+    
+    // Vérifier si EmailJS est configuré
+    // if (EMAILJS_SERVICE_ID === 'service_lzni7o5' || 
+    //     EMAILJS_TEMPLATE_ID === 'template_t4kt17n' ) {
+    //   console.error('EmailJS non configuré ! Voir les instructions dans Contact.tsx');
+    //   // Mode démo si non configuré
+    //   setStatus('loading');
+    //   await new Promise((resolve) => setTimeout(resolve, 1500));
+    //   setStatus('success');
+    //   setFormData({ name: '', email: '', subject: '', message: '' });
+    //   setTimeout(() => setStatus('idle'), 5000);
+    //   return;
+    // }
+
     setStatus('loading');
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    
-    // For demo purposes, always succeed
-    setStatus('success');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    
-    // Reset status after 5 seconds
-    setTimeout(() => setStatus('idle'), 5000);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
+      
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      console.error('Erreur EmailJS:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   return (
@@ -117,7 +153,7 @@ export function Contact() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0">
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   {/* Name field */}
                   <div className="space-y-2">
                     <label className="font-mono text-xs sm:text-sm text-muted-foreground">
@@ -125,9 +161,9 @@ export function Contact() {
                     </label>
                     <motion.input
                       type="text"
-                      name="name"
+                      name="from_name"
                       value={formData.name}
-                      onChange={handleChange}
+                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                       onFocus={() => setFocusedField('name')}
                       onBlur={() => setFocusedField(null)}
                       required
@@ -147,9 +183,9 @@ export function Contact() {
                     </label>
                     <motion.input
                       type="email"
-                      name="email"
+                      name="from_email"
                       value={formData.email}
-                      onChange={handleChange}
+                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                       onFocus={() => setFocusedField('email')}
                       onBlur={() => setFocusedField(null)}
                       required
@@ -171,7 +207,7 @@ export function Contact() {
                       type="text"
                       name="subject"
                       value={formData.subject}
-                      onChange={handleChange}
+                      onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
                       onFocus={() => setFocusedField('subject')}
                       onBlur={() => setFocusedField(null)}
                       required
@@ -192,7 +228,7 @@ export function Contact() {
                     <motion.textarea
                       name="message"
                       value={formData.message}
-                      onChange={handleChange}
+                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                       onFocus={() => setFocusedField('message')}
                       onBlur={() => setFocusedField(null)}
                       required
