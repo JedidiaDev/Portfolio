@@ -2,27 +2,17 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { 
-  Send, Mail, MapPin, Phone, Github, Linkedin, 
-  Twitter, Terminal, CheckCircle, AlertCircle 
+  Send, Mail, MapPin, Phone, Github, Terminal, CheckCircle, AlertCircle, 
+  Facebook,
+  Instagram
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-// ============================================
-// CONFIGURATION EMAILJS - À REMPLIR
-// ============================================
-// 1. Crée un compte gratuit sur https://www.emailjs.com/
-// 2. Dans "Email Services", ajoute ton service email (Gmail, etc.)
-// 3. Dans "Email Templates", crée un template avec ces variables:
-//    - {{from_name}} : Nom de l'expéditeur
-//    - {{from_email}} : Email de l'expéditeur  
-//    - {{subject}} : Sujet du message
-//    - {{message}} : Contenu du message
-// 4. Copie tes identifiants ci-dessous:
-const EMAILJS_SERVICE_ID = 'service_lzni7o5';  // Ex: 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_t4kt17n'; // Ex: 'template_xyz789'
-const EMAILJS_PUBLIC_KEY = '1Kv11eqk0JHxXlurv';   // Ex: 'AbCdEfGhIjKlMnOp'
-// ============================================
+// Configuration EmailJS via variables d'environnement
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const contactInfo = [
   {
@@ -46,8 +36,10 @@ const contactInfo = [
 
 const socialLinks = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/JedidiaDev', username: '@JedidiaDev' },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', username: '/in/username' },
-  { icon: Twitter, label: 'Twitter', href: 'https://twitter.com', username: '@username' },
+//   { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', username: '/in/username' },
+  { icon: Facebook, label: 'Facebook', href: 'https://facebook.com/jedidia.kamdem', username: '@Jedidia Kamdem' },
+//   { icon: Twitter, label: 'Twitter', href: 'https://twitter.com', username: '@username' },
+  { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/kamdemjedidia', username: '@kamdemjedidia' },
 ];
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -69,17 +61,12 @@ export function Contact() {
     if (!formRef.current) return;
     
     // Vérifier si EmailJS est configuré
-    // if (EMAILJS_SERVICE_ID === 'service_lzni7o5' || 
-    //     EMAILJS_TEMPLATE_ID === 'template_t4kt17n' ) {
-    //   console.error('EmailJS non configuré ! Voir les instructions dans Contact.tsx');
-    //   // Mode démo si non configuré
-    //   setStatus('loading');
-    //   await new Promise((resolve) => setTimeout(resolve, 1500));
-    //   setStatus('success');
-    //   setFormData({ name: '', email: '', subject: '', message: '' });
-    //   setTimeout(() => setStatus('idle'), 5000);
-    //   return;
-    // }
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      console.error('EmailJS non configuré ! Vérifiez vos variables d\'environnement dans .env');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
 
     setStatus('loading');
 

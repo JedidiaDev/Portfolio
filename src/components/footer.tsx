@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, Mail, Terminal, Heart, Instagram } from 'lucide-react';
+import { Github, Mail, Terminal, Heart, Instagram, Facebook } from 'lucide-react';
 
 const socialLinks = [
   { name: 'GitHub', icon: Github, href: 'https://github.com/JedidiaDev' },
-  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
-  { name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
-  { name: 'Email', icon: Mail, href: 'mailto:jedidiakamdemsouop@gmail.com' },
+//   { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
+//   { name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
+  { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/jedidia.kamdem' },
   { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/kamdemjedidia' },
+  { name: 'Email', icon: Mail, href: 'mailto:jedidiakamdemsouop@gmail.com' },
 ];
 
 export function Footer() {
@@ -51,7 +52,7 @@ export function Footer() {
               {['Accueil', 'À propos', 'Projets', 'Contact'].map((link) => (
                 <a
                   key={link}
-                  href={`#${link.toLowerCase().replace('à propos', 'about')}`}
+                  href={`#${link.toLowerCase().replace('à propos', 'about').replace('projets', 'projects').replace('accueil', 'home')}`}
                   className="text-muted-foreground hover:text-primary transition-colors interactive"
                 >
                   <span className="text-primary/50">→</span> {link}
