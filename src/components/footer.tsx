@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { Github, Mail, Terminal, Heart, Instagram, Facebook } from 'lucide-react';
+import { Github, Mail, Terminal, Heart, Instagram, Facebook, Linkedin } from 'lucide-react';
 
 const socialLinks = [
   { name: 'GitHub', icon: Github, href: 'https://github.com/JedidiaDev' },
-//   { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/jedidia-kamdem-souop-ba58753b0/' },
 //   { name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
   { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/jedidia.kamdem' },
   { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/kamdemjedidia' },

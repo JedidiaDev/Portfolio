@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { 
   Send, Mail, MapPin, Phone, Github, Terminal, CheckCircle, AlertCircle, 
-  Facebook,
+  Linkedin,
   Instagram
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -36,8 +36,8 @@ const contactInfo = [
 
 const socialLinks = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/JedidiaDev', username: '@JedidiaDev' },
-//   { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', username: '/in/username' },
-  { icon: Facebook, label: 'Facebook', href: 'https://facebook.com/jedidia.kamdem', username: '@Jedidia Kamdem' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/jedidia-kamdem-souop-ba58753b0/', username: 'in/jedidia-kamdem-souop' },
+  // { icon: Facebook, label: 'Facebook', href: 'https://facebook.com/jedidia.kamdem', username: '@Jedidia Kamdem' },
 //   { icon: Twitter, label: 'Twitter', href: 'https://twitter.com', username: '@username' },
   { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/kamdemjedidia', username: '@kamdemjedidia' },
 ];

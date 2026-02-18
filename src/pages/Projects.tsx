@@ -25,11 +25,11 @@ const projects: Project[] = [
   {
     id: 1,
     title: 'TutorHub',
-    description: 'Dashboard d\'administration avec authentification multi-facteurs, gestion des rôles et audit de sécurité intégré.',
+    description: 'Plateforme de mise en relation entre élèves et répétiteurs',
     category: 'fullstack',
     tech: ['React', 'Next js', 'Spring', 'PostgreSQL', 'JWT', 'Docker'],
     github: 'https://github.com/JedidiaDev/TutorHub',
-    demo: 'https://demo.com',
+    // demo: 'https://tutorhub.cm',
     featured: true,
     // securityFocus: true,
   },
