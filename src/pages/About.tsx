@@ -4,29 +4,36 @@ import {
   Terminal, Wifi, Bug, Eye, Cpu, FileCode 
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  SiReact, SiTypescript, SiNextdotjs, SiTailwindcss,
+  SiNodedotjs, SiPostgresql, SiDocker, SiKalilinux, SiVite, SiSpring, SiLaravel,
+  SiOwasp, SiBurpsuite, SiWireshark
+} from 'react-icons/si';
+import { TbRadar } from 'react-icons/tb';
+import type { IconType } from 'react-icons';
 
 const skills = {
   frontend: [
-    { name: 'React', level: 90 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Next.js', level: 80 },
-    { name: 'Tailwind CSS', level: 95 },
-    { name: 'Vue.js', level: 70 },
+    { name: 'React', icon: SiReact },
+    { name: 'TypeScript', icon: SiTypescript },
+    { name: 'Next.js', icon: SiNextdotjs },
+    { name: 'Tailwind CSS', icon: SiTailwindcss },
+    { name: 'Vite.js', icon: SiVite },
   ],
   backend: [
-    { name: 'Java', level: 88 },
-    { name: 'Node.js', level: 85 },
-    { name: 'PHP', level: 85 },
-    { name: 'PostgreSQL', level: 80 },
-    // { name: 'MongoDB', level: 75 },
-    { name: 'Docker', level: 80 },
+    // { name: 'Java', icon: SiOpenjdk },
+    { name: 'Spring', icon: SiSpring },
+    { name: 'Node.js', icon: SiNodedotjs },
+    { name: 'Laravel', icon: SiLaravel },
+    { name: 'PostgreSQL', icon: SiPostgresql },
+    { name: 'Docker', icon: SiDocker },
   ],
   security: [
-    { name: 'Pentesting', level: 75 },
-    { name: 'OWASP', level: 80 },
-    { name: 'Burp Suite', level: 70 },
-    { name: 'Nmap', level: 75 },
-    { name: 'Wireshark', level: 65 },
+    { name: 'Pentesting', icon: SiKalilinux },
+    { name: 'OWASP', icon: SiOwasp },
+    { name: 'Burp Suite', icon: SiBurpsuite },
+    { name: 'Nmap', icon: TbRadar },
+    { name: 'Wireshark', icon: SiWireshark },
   ],
 };
 
@@ -63,24 +70,19 @@ const timeline = [
   },
 ];
 
-function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+function SkillIcon({ name, icon: Icon, delay }: { name: string; icon: IconType; delay: number }) {
   return (
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm font-mono">
-        <span className="text-foreground">{name}</span>
-        <span className="text-primary">{level}%</span>
-      </div>
-      <div className="h-2 bg-secondary rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-primary to-accent"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay, ease: 'easeOut' }}
-          style={{ boxShadow: '0 0 10px var(--primary)' }}
-        />
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3, delay }}
+      whileHover={{ scale: 1.1, y: -5 }}
+      className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary/30 border border-primary/20 hover:border-primary/50 transition-all group cursor-pointer"
+    >
+      <Icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
+      <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition-colors">{name}</span>
+    </motion.div>
   );
 }
 
@@ -184,15 +186,17 @@ export function About() {
                   Frontend
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {skills.frontend.map((skill, index) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    name={skill.name} 
-                    level={skill.level} 
-                    delay={index * 0.1} 
-                  />
-                ))}
+              <CardContent>
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                  {skills.frontend.map((skill, index) => (
+                    <SkillIcon 
+                      key={skill.name} 
+                      name={skill.name} 
+                      icon={skill.icon} 
+                      delay={index * 0.1} 
+                    />
+                  ))}
+                </div>
               </CardContent>
             </Card>
 
@@ -204,15 +208,17 @@ export function About() {
                   Backend
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {skills.backend.map((skill, index) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    name={skill.name} 
-                    level={skill.level} 
-                    delay={index * 0.1} 
-                  />
-                ))}
+              <CardContent>
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                  {skills.backend.map((skill, index) => (
+                    <SkillIcon 
+                      key={skill.name} 
+                      name={skill.name} 
+                      icon={skill.icon} 
+                      delay={index * 0.1} 
+                    />
+                  ))}
+                </div>
               </CardContent>
             </Card>
 
@@ -224,15 +230,17 @@ export function About() {
                   Sécurité
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {skills.security.map((skill, index) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    name={skill.name} 
-                    level={skill.level} 
-                    delay={index * 0.1} 
-                  />
-                ))}
+              <CardContent>
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                  {skills.security.map((skill, index) => (
+                    <SkillIcon 
+                      key={skill.name} 
+                      name={skill.name} 
+                      icon={skill.icon} 
+                      delay={index * 0.1} 
+                    />
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </motion.div>
