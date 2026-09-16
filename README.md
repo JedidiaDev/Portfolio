@@ -1,104 +1,36 @@
-# Portfolio - Développeur Full-Stack
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Un portfolio moderne et interactif construit avec React et Framer Motion.
+## Getting Started
 
-## Fonctionnalités
-
-- **Animations fluides** : Animations de scroll, effets de parallax et transitions élégantes avec Framer Motion
-- **Curseur personnalisé** : Curseur animé avec effets de survol
-- **Design responsive** : Adapté à tous les écrans (mobile, tablette, desktop)
-- **Mode sombre** : Design épuré avec thème sombre moderne
-- **Performance optimisée** : Chargement rapide et animations fluides
-
-## Sections
-
-1. **Hero** - Présentation avec effet typewriter et animations au scroll
-2. **À propos** - Section sur vous avec statistiques animées
-3. **Projets** - Grille de projets filtrable avec hover effects
-4. **Compétences** - Barres de progression animées par catégorie
-5. **Contact** - Formulaire de contact avec animations de focus
-
-## Technologies utilisées
-
-- **React 18** - Framework JavaScript
-- **Vite** - Build tool ultra-rapide
-- **Framer Motion** - Animations et gestures
-- **CSS Modules** - Styles scopés par composant
-- **React Intersection Observer** - Animations au scroll
-
-## Installation
+First, run the development server:
 
 ```bash
-# Installer les dépendances
-npm install
-
-# Lancer le serveur de développement
 npm run dev
-
-# Build pour la production
-npm run build
-
-# Prévisualiser le build
-npm run preview
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Personnalisation
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Modifier vos informations
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. **Hero** (`src/components/Hero.jsx`) : Changez votre nom et titre
-2. **About** (`src/components/About.jsx`) : Modifiez votre description et statistiques
-3. **Projects** (`src/components/Projects.jsx`) : Ajoutez vos projets
-4. **Skills** (`src/components/Skills.jsx`) : Mettez à jour vos compétences
-5. **Contact** (`src/components/Contact.jsx`) : Changez vos coordonnées
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Modifier les couleurs
+## Learn More
 
-Éditez les variables CSS dans `src/styles/index.css` :
+To learn more about Next.js, take a look at the following resources:
 
-```css
-:root {
-  --accent-primary: #6366f1;    /* Couleur principale */
-  --accent-secondary: #8b5cf6;  /* Couleur secondaire */
-  --bg-primary: #0a0a0f;        /* Fond principal */
-}
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Ajouter EmailJS pour le formulaire
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-1. Créez un compte sur [EmailJS](https://www.emailjs.com/)
-2. Configurez un service et template
-3. Modifiez `Contact.jsx` pour intégrer EmailJS
+## Deploy on Vercel
 
-## Structure du projet
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-```
-src/
-├── components/
-│   ├── About.jsx        # Section À propos
-│   ├── Contact.jsx      # Section Contact
-│   ├── CustomCursor.jsx # Curseur personnalisé
-│   ├── Footer.jsx       # Pied de page
-│   ├── Hero.jsx         # Section Hero
-│   ├── Loader.jsx       # Animation de chargement
-│   ├── Navbar.jsx       # Navigation
-│   ├── Projects.jsx     # Section Projets
-│   ├── Skills.jsx       # Section Compétences
-│   └── SmoothScroll.jsx # Wrapper scroll
-├── styles/
-│   └── index.css        # Styles globaux
-├── App.jsx              # Composant principal
-└── main.jsx             # Point d'entrée
-```
-
-## Déploiement
-
-Le projet peut être déployé sur :
-
-- **Vercel** : `vercel`
-- **Netlify** : Glissez-déposez le dossier `dist`
-- **GitHub Pages** : Avec le paquet `gh-pages`
-
-## Licence
-
-MIT - Utilisez librement pour vos projets personnels !
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
