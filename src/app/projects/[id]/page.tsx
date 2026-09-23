@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROJECTS, type Project } from "@/data/projects";
@@ -7,8 +8,7 @@ import { PROJECTS, type Project } from "@/data/projects";
 type ProjectStatus = Project["status"];
 
 // Libellé long du badge d'en-tête — distinct du libellé court utilisé dans
-// la grille (statusLabel : "LIVE", "48H"...). Correspond au texte exact de
-// la maquette pour "live" ("EN PRODUCTION").
+// la grille (statusLabel : "LIVE", "48H"...).
 const STATUS_BADGE: Record<ProjectStatus, string> = {
   live: "EN PRODUCTION",
   mvp: "MVP",
@@ -20,46 +20,71 @@ export function generateStaticParams() {
   return PROJECTS.map((p) => ({ id: p.id }));
 }
 
-export default async function ProjectDetail({
+export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+}: PageProps<"/projects/[id]">): Promise<Metadata> {
   const { id } = await params;
   const project = PROJECTS.find((p) => p.id === id);
-  if (!project) notFound();
+  if (!project) return { title: "Projet introuvable" };
+
+  return {
+    title: project.title,
+    description: project.desc,
+    alternates: { canonical: `/projects/${project.id}` },
+    openGraph: { title: project.title, description: project.desc },
+  };
+}
+
+export default async function ProjectDetail({
+  params,
+}: PageProps<"/projects/[id]">) {
+  const { id } = await params;
+  const index = PROJECTS.findIndex((p) => p.id === id);
+  if (index < 0) notFound();
+
+  const project = PROJECTS[index];
+  // Parcours circulaire : depuis le dernier stage on revient au premier,
+  // plutôt que de tomber sur un bouton mort.
+  const previous = PROJECTS[(index - 1 + PROJECTS.length) % PROJECTS.length];
+  const next = PROJECTS[(index + 1) % PROJECTS.length];
 
   return (
-    <section className="scr-section scr-full scr-top">
+    <section className="scr-section scr-top">
       <div className="wrap">
         <Link href="/projects" className="back-link">
-          ← STAGE SELECT
+          <span className="glyph">←</span> STAGE SELECT
         </Link>
 
-        <div className="detail px-thick">
+        <article className="detail px-thick">
           <div className="dh">
-            <span className="t">
+            <h1 className="t">
               {project.no} — {project.title}
-            </span>
+            </h1>
             <span className={`status-badge ${project.status}`}>
-              ● {STATUS_BADGE[project.status]}
+              <span className="glyph" aria-hidden="true">● </span>
+              {STATUS_BADGE[project.status]}
             </span>
           </div>
+
           <div className="db">
             <div className="dblock">
-              <h4>CONTEXTE</h4>
+              <h2>CONTEXTE</h2>
               <p>{project.context}</p>
             </div>
             <div className="dblock">
-              <h4>MON RÔLE</h4>
+              <h2>MON RÔLE</h2>
               <p>{project.role}</p>
             </div>
-            <div className="dblock" style={{ gridColumn: "1 / -1" }}>
-              <h4>ARCHITECTURE</h4>
-              <pre className="archi">{project.architecture}</pre>
+            <div className="dblock dblock-wide">
+              <h2>ARCHITECTURE</h2>
+              {/* tabIndex : un bloc qui défile horizontalement doit pouvoir
+                  être atteint et défilé au clavier. */}
+              <pre className="archi" tabIndex={0} role="img" aria-label={`Schéma d'architecture de ${project.title}`}>
+                {project.architecture}
+              </pre>
             </div>
             <div className="dblock">
-              <h4>RÉSULTAT</h4>
+              <h2>RÉSULTAT</h2>
               <p>{project.result}</p>
             </div>
             <div className="dblock detail-actions">
@@ -68,9 +93,10 @@ export default async function ProjectDetail({
                   href={project.liveUrl}
                   className="btn sm"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                 >
                   VOIR LE SITE
+                  <span className="ext-mark" aria-hidden="true">↗</span>
                 </a>
               )}
               {project.codeUrl && (
@@ -78,14 +104,31 @@ export default async function ProjectDetail({
                   href={project.codeUrl}
                   className="btn sm ghost"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                 >
                   CODE
+                  <span className="ext-mark" aria-hidden="true">↗</span>
                 </a>
               )}
             </div>
           </div>
-        </div>
+        </article>
+
+        {/* Passer au stage suivant sans repasser par la grille. */}
+        <nav className="stage-pager" aria-label="Autres projets">
+          <Link href={`/projects/${previous.id}`} className="pager-link">
+            <span className="pager-dir">
+              <span className="glyph">◂</span> PRÉCÉDENT
+            </span>
+            <span className="pager-title">{previous.title}</span>
+          </Link>
+          <Link href={`/projects/${next.id}`} className="pager-link right">
+            <span className="pager-dir">
+              SUIVANT <span className="glyph">▸</span>
+            </span>
+            <span className="pager-title">{next.title}</span>
+          </Link>
+        </nav>
       </div>
     </section>
   );

@@ -2,30 +2,68 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { stageLabelFor, TABS } from "@/lib/nav";
+import { isActive, stageLabelFor, TABS } from "@/lib/nav";
+import { PROJECTS } from "@/data/projects";
 
-type MenuItem = { label: string; hint: string; href: string; download?: boolean };
+const PROJECT_COUNT = PROJECTS.length;
 
-const ITEMS: MenuItem[] = [
-  { label: "PLAYER CARD",  hint: "qui je suis",   href: "/about" },
-  { label: "STAGE SELECT", hint: "6 projets",     href: "/projects" },
-  { label: "QUEST LOG",    hint: "parcours",      href: "/parcours" },
-  { label: "CONTINUE?",    hint: "me contacter",  href: "/contact" },
-  { label: "CV.PDF",       hint: "télécharger",   href: "/cv.pdf", download: true },
+type MenuItem = {
+  label: string;
+  hint: string;
+  href: string;
+  download?: boolean;
+  external?: boolean;
+};
+
+const BASE_ITEMS: MenuItem[] = [
+  { label: "PLAYER CARD",  hint: "qui je suis",         href: "/about" },
+  { label: "STAGE SELECT", hint: `${PROJECT_COUNT} projets`, href: "/projects" },
+  { label: "QUEST LOG",    hint: "parcours",            href: "/parcours" },
+  { label: "CONTINUE?",    hint: "me contacter",        href: "/contact" },
+  { label: "INSERT COIN",  hint: "soutenir le travail", href: "/soutien" },
 ];
 
-export default function CommandMenu({ onClose }: { onClose: () => void }) {
+const CV_ITEM: MenuItem = {
+  label: "CV.PDF",
+  hint: "télécharger",
+  href: "/cv.pdf",
+  download: true,
+};
+
+export default function CommandMenu({
+  onClose,
+  hasCv,
+}: {
+  onClose: () => void;
+  hasCv: boolean;
+}) {
+  // Le CV n'apparaît que si public/cv.pdf existe — proposer un
+  // téléchargement qui renvoie une 404 est pire que ne rien proposer.
+  const ITEMS = hasCv ? [...BASE_ITEMS, CV_ITEM] : BASE_ITEMS;
   const router = useRouter();
   const pathname = usePathname();
-  const [active, setActive] = useState(0);
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
+  // Le menu s'ouvre sur la destination courante plutôt que systématiquement
+  // sur la première : le repère visuel correspond alors à où l'on est.
+  // Calculé au premier rendu — rien à recorriger ensuite.
+  const [active, setActive] = useState(() => {
+    const here = ITEMS.findIndex(
+      (i) => !i.download && isActive(i.href, pathname),
+    );
+    return here >= 0 ? here : 0;
+  });
+
+  // Empêche la page en dessous de défiler tant que la modale est ouverte.
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    itemRefs.current[0]?.focus();
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, []);
 
+  // Déplace le focus avec la sélection — y compris au montage.
   useEffect(() => {
     itemRefs.current[active]?.focus();
   }, [active]);
@@ -44,55 +82,113 @@ export default function CommandMenu({ onClose }: { onClose: () => void }) {
 
   function onKeyDown(e: React.KeyboardEvent) {
     switch (e.key) {
-      case "Escape": e.preventDefault(); onClose(); break;
-      case "ArrowDown": e.preventDefault(); setActive((i) => (i + 1) % ITEMS.length); break;
-      case "ArrowUp": e.preventDefault(); setActive((i) => (i - 1 + ITEMS.length) % ITEMS.length); break;
-      case "Home": e.preventDefault(); setActive(0); break;
-      case "End": e.preventDefault(); setActive(ITEMS.length - 1); break;
+      case "Escape":
+        e.preventDefault();
+        onClose();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        setActive((i) => (i + 1) % ITEMS.length);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setActive((i) => (i - 1 + ITEMS.length) % ITEMS.length);
+        break;
+      case "Home":
+        e.preventDefault();
+        setActive(0);
+        break;
+      case "End":
+        e.preventDefault();
+        setActive(ITEMS.length - 1);
+        break;
       case "Enter":
-      case " ": e.preventDefault(); activate(ITEMS[active]); break;
+      case " ":
+        e.preventDefault();
+        activate(ITEMS[active]);
+        break;
+      case "Tab": {
+        // Piège à focus : une boîte de dialogue modale ne doit pas laisser
+        // la tabulation filer vers la page qu'elle recouvre.
+        e.preventDefault();
+        if (document.activeElement === closeRef.current) {
+          itemRefs.current[active]?.focus();
+        } else {
+          closeRef.current?.focus();
+        }
+        break;
+      }
     }
   }
 
   return (
-    <div role="dialog" aria-modal="true" aria-label="Menu principal" onKeyDown={onKeyDown} className="command-overlay">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu principal"
+      onKeyDown={onKeyDown}
+      className="command-overlay"
+    >
       <div className="hud">
-        <span className="l" style={{ color: "var(--raffia-dim)", textDecoration: "line-through" }}>ANONYM</span>
+        <span className="l" style={{ color: "var(--raffia-dim)" }}>
+          ANONYM
+        </span>
         <span className="m">{stageLabelFor(pathname)} / MENU</span>
-        <button onClick={onClose} className="r" style={{ background: "none", border: 0, cursor: "pointer", font: "inherit" }}>
-          ESC POUR FERMER
+        <button
+          ref={closeRef}
+          type="button"
+          onClick={onClose}
+          className="r hud-trigger"
+        >
+          <span className="hud-trigger-label">FERMER</span>
+          <kbd className="hud-kbd" aria-hidden="true">ESC</kbd>
         </button>
       </div>
 
-      <nav className="hud-nav">
+      <nav className="hud-nav command-tabs" aria-label="Sections">
         {TABS.map((tab) => {
-          const isActive = tab.href === pathname;
+          const current = isActive(tab.href, pathname);
           return (
-            <a key={tab.href} href={tab.href} aria-current={isActive ? "page" : undefined} className={isActive ? "active" : undefined}>
-              {isActive && "▸ "}{tab.label}
+            <a
+              key={tab.href}
+              href={tab.href}
+              aria-current={current ? "page" : undefined}
+              className={current ? "active" : undefined}
+              tabIndex={-1}
+            >
+              {tab.label}
             </a>
           );
         })}
       </nav>
 
       <div className="command-list">
-        <p className="t-sm" style={{ color: "var(--ochre)", marginBottom: "var(--s4)" }}>
-          SELECTIONNEZ UNE DESTINATION
-        </p>
+        <p className="t-sm command-title">SÉLECTIONNEZ UNE DESTINATION</p>
         {ITEMS.map((item, i) => {
-          const isActive = i === active;
+          const focused = i === active;
+          const current = !item.download && isActive(item.href, pathname);
           return (
             <a
               key={item.label}
-              ref={(el) => { itemRefs.current[i] = el; }}
+              ref={(el) => {
+                itemRefs.current[i] = el;
+              }}
               href={item.href}
               download={item.download}
-              tabIndex={isActive ? 0 : -1}
+              aria-current={current ? "page" : undefined}
+              tabIndex={focused ? 0 : -1}
               onFocus={() => setActive(i)}
-              onClick={(e) => { e.preventDefault(); activate(item); }}
-              className={`command-item${isActive ? " active" : ""}`}
+              onMouseEnter={() => setActive(i)}
+              onClick={(e) => {
+                e.preventDefault();
+                activate(item);
+              }}
+              className={`command-item${focused ? " active" : ""}`}
             >
-              <span>{isActive && "▸ "}{item.label}</span>
+              <span className="command-caret" aria-hidden="true">
+                {focused ? "▸" : ""}
+              </span>
+              <span className="command-label">{item.label}</span>
               <span className="command-hint">{item.hint}</span>
             </a>
           );
