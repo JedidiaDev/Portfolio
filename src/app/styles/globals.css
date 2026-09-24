@@ -2083,6 +2083,10 @@ html[data-fx="off"] .quest-runner {
   .rf1 { opacity: 1; }
   .runner-walk { opacity: 1; }
   .runner-jump { opacity: 0; }
+  /* Figées, les deux animations s'arrêtent à leur état initial : un obstacle
+     se retrouverait pile sous le coureur posé au sol. Un décalage d'un demi
+     intervalle dégage la case. */
+  .obstacle-track { transform: translateX(-80px); }
 }
 
 /* ==========================================================================

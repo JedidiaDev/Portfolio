@@ -2,7 +2,18 @@ export type Project = {
   id: string;
   no: string;
   thumb: "a" | "b" | "c" | "d" | "e";
-  icon: "cart" | "key" | "flask" | "book" | "car" | "hands";
+  icon:
+    | "cart"
+    | "key"
+    | "flask"
+    | "book"
+    | "car"
+    | "hands"
+    | "baby"
+    | "leaf"
+    | "dice"
+    | "building"
+    | "school";
   title: string;
   desc: string;
   chips: string[];
@@ -115,21 +126,115 @@ App Chauffeur ─┼─► Spring Boot API ──► canal temps réel (SOS, tra
 Dashboard Admin ─┘`,
     result: "MVP livré en 48h dans le cadre du hackathon NuxCine 2026.",
   },
+  // {
+  //   id: "afroza-together",
+  //   no: "STAGE 06",
+  //   thumb: "c",
+  //   icon: "hands",
+  //   title: "AFROZA TOGETHER",
+  //   desc: "Cagnottes solidaires. Collecte, suivi de progression, reversement.",
+  //   chips: ["Django", "React"],
+  //   status: "live",
+  //   statusLabel: "LIVE",
+  //   context: "Permettre des cagnottes solidaires suivies et transparentes.",
+  //   role: "Refonte de l'identité visuelle et de l'expérience de suivi de progression.",
+  //   architecture: `React (client)
+  //  │
+  //  └─ Django API ──► PostgreSQL`,
+  //   result: "En ligne.", // TODO: remplace par un résultat vérifiable
+  // },
   {
-    id: "afroza-together",
+    id: "muna-daycare",
     no: "STAGE 06",
-    thumb: "c",
-    icon: "hands",
-    title: "AFROZA TOGETHER",
-    desc: "Cagnottes solidaires. Collecte, suivi de progression, reversement.",
-    chips: ["Django", "React"],
+    thumb: "d",
+    icon: "baby",
+    title: "MUNA DAYCARE",
+    desc: "Plateforme web pour une crèche : site marketing et trois espaces tableau de bord. App mobile parents en cours de dev.",
+    chips: ["NextJS", "Dashboards", "App mobile (en dev)"],
     status: "live",
     statusLabel: "LIVE",
-    context: "Permettre des cagnottes solidaires suivies et transparentes.",
-    role: "Refonte de l'identité visuelle et de l'expérience de suivi de progression.",
-    architecture: `React (client)
+    context:
+      "Simplifier la gestion administrative d'une crèche et faciliter la communication avec les parents, notamment pour le remplissage des registres.",
+    role: "Développement du site marketing sept pages, puis d'une app mobile pour faciliter le remplissage des registres par les parents.",
+    architecture: `Site marketing (7 pages)
    │
-   └─ Django API ──► PostgreSQL`,
-    result: "En ligne.", // TODO: remplace par un résultat vérifiable
+   └─ 1 dashboard (Admin)
+                  ──► App mobile parents (en dev)`,
+    result: "En ligne sur muna-daycare.cm ; application mobile parents en cours de développement.", // TODO: mettre à jour au lancement de l'app
+    liveUrl: "https://muna-daycare.cm",
+  },
+  {
+    id: "botanik-afro",
+    no: "STAGE 07",
+    thumb: "a",
+    icon: "leaf",
+    title: "BOTANIK'AFRO",
+    desc: "Système de design UI/UX complet et site sept pages pour une marque de soins capillaires naturels.",
+    chips: ["Design System", "Figma", "Next.js"],
+    status: "wip",
+    statusLabel: "VERSION TEST",
+    context:
+      "Construire une identité de marque cohérente et un site aligné sur le logo, pour une marque de soins capillaires naturels.",
+    role: "Conception du système de design UI/UX (palette et typographie ajustées au logo) et développement du site sept pages.",
+    architecture: `Design system (Figma)
+   │
+   └─ Site 7 pages (Next.js)`,
+    result: "Version de test en ligne.", // TODO: remplacer par l'URL et le statut définitifs au lancement
+    liveUrl: "https://botanik-afro.vercel.app",
+  },
+  {
+    id: "la-course-de-la-foi",
+    no: "STAGE 08",
+    thumb: "b",
+    icon: "dice",
+    title: "LA COURSE DE LA FOI",
+    desc: "Jeu de société biblique multiplateforme (mobile, web, back-office) en 9 langues, pour un client.",
+    chips: ["Spring Boot", "PostgreSQL", "Mobile", "CMS"],
+    status: "rnd",
+    statusLabel: "CONCEPTION",
+    context:
+      "Donner vie à un jeu de société biblique multilingue pensé par un client, sous forme d'application mobile, web et back-office.",
+    role: "Analyse du cahier des charges, identité visuelle, maquettes UI/UX (mobile, web, CMS), architecture technique et chiffrage budgétaire, en tant que prestataire indépendant.",
+    architecture: `App mobile / Web (maquettes)
+   │
+   └─ Spring Boot API ──► PostgreSQL
+                       ──► back-office CMS`,
+    result: "Cahier des charges, identité visuelle, maquettes UI/UX et architecture technique livrés au client ; développement à venir.", // TODO: mettre à jour au démarrage du développement
+  },
+  {
+    id: "toguna-architects",
+    no: "STAGE 09",
+    thumb: "c",
+    icon: "building",
+    title: "TOGUNA ARCHITECTS",
+    desc: "Charte graphique et plateforme web pour un cabinet d'architecture, logo inspiré du toguna dogon.",
+    chips: ["Branding", "UI/UX", "Web"],
+    status: "wip",
+    statusLabel: "EN COURS",
+    context:
+      "Créer une identité de marque forte pour un cabinet d'architecture, avant de développer sa plateforme web complète.",
+    role: "Conception de la charte graphique complète (logo inspiré du toguna dogon, slogan « From dialogue to dwelling ») puis des maquettes UI/UX de la plateforme, en tant que prestataire.",
+    architecture: `Charte graphique (logo, typographie)
+   │
+   └─ Maquettes UI/UX ──► Plateforme web (à venir)`,
+    result: "Charte graphique livrée ; maquettes UI/UX et plateforme web en préparation.", // TODO: mettre à jour à la mise en ligne
+  },
+  {
+    id: "tamtoum",
+    no: "STAGE 10",
+    thumb: "e",
+    icon: "school",
+    title: "TAMTOUM",
+    desc: "Numérisation du système éducatif camerounais : plateforme multi-tenant pour écoles, collèges et lycées.",
+    chips: ["Multi-tenant", "EdTech", "SaaS"],
+    status: "rnd",
+    statusLabel: "R&D",
+    context:
+      "Numériser la gestion administrative et pédagogique des établissements scolaires camerounais via une architecture multi-tenant.",
+    role: "Conception de l'architecture multi-tenant permettant à chaque établissement de gérer facilement son propre espace.",
+    architecture: `Plateforme multi-tenant
+   │
+   └─ Établissement A / B / C ... (espace isolé par tenant)`,
+    result: "Projet en phase de conception.", // TODO: mettre à jour à l'avancement du projet
   },
 ];

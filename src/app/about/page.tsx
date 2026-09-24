@@ -96,12 +96,20 @@ export default function Profil() {
                   parallèle — d&apos;une place de marché en production à un
                   système de paiement mobile encore en prototype.
                 </p>
-                <p className="body">
-                  Ma licence en sécurité informatique n&apos;est pas une ligne
-                  décorative : elle change la façon dont je découpe une API,
-                  dont je gère une session et dont je révise le code des
-                  autres.
-                </p>
+                <div>
+                  <p className="body">
+                    Ma licence en sécurité informatique n&apos;est pas une ligne
+                    décorative : elle change la façon dont je découpe une API,
+                    dont je gère une session et dont je révise le code des
+                    autres.
+                  </p>
+                  <p className="body">
+                    Ma devise : <b>
+                      « La sécurité n&apos;est pas une option, c&apos;est une
+                      nécessité »
+                    </b>.
+                  </p>
+                </div>
               </div>
             </div>
 

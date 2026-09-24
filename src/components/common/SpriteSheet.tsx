@@ -84,6 +84,41 @@ export default function SpriteSheet() {
             d="M1 2h2v1H1zM5 2h2v1H5zM0 3h3v3H0zM5 3h3v3H5zM3 4h2v2H3z"
           />
         </symbol>
+        <symbol id="i-baby" viewBox="0 0 8 8">
+          <path
+            shapeRendering="crispEdges"
+            fill="currentColor"
+            d="M3 0h2v1H3zM3 1h2v2H3zM2 3h4v1H2zM1 4h6v4H1z"
+          />
+        </symbol>
+        <symbol id="i-leaf" viewBox="0 0 8 8">
+          <path
+            shapeRendering="crispEdges"
+            fill="currentColor"
+            d="M3 0h2v1H3zM2 1h4v1H2zM1 2h6v3H1zM2 5h4v1H2zM3 6h2v2H3z"
+          />
+        </symbol>
+        <symbol id="i-dice" viewBox="0 0 8 8">
+          <path
+            shapeRendering="crispEdges"
+            fill="currentColor"
+            d="M1 0h6v1H1zM0 1h1v6H0zM7 1h1v6H7zM1 7h6v1H1zM2 2h1v1H2zM5 2h1v1H5zM2 5h1v1H2zM5 5h1v1H5zM3 3h2v2H3z"
+          />
+        </symbol>
+        <symbol id="i-building" viewBox="0 0 8 8">
+          <path
+            shapeRendering="crispEdges"
+            fill="currentColor"
+            d="M2 0h4v1H2zM1 1h1v7H1zM6 1h1v7H6zM2 2h1v1H2zM4 2h1v1H4zM2 4h1v1H2zM4 4h1v1H4zM3 6h2v2H3z"
+          />
+        </symbol>
+        <symbol id="i-school" viewBox="0 0 8 8">
+          <path
+            shapeRendering="crispEdges"
+            fill="currentColor"
+            d="M2 1h4v1H2zM0 2h8v1H0zM3 3h2v3H3zM6 2h1v3H6zM6 5h1v1H6z"
+          />
+        </symbol>
       </defs>
     </svg>
   );
