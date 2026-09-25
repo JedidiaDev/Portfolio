@@ -27,6 +27,33 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 const EMPTY = { name: "", email: "", subject: "", message: "" };
 
+const GENERIC_FAILURE =
+  "L'envoi a échoué. Réessaie, ou écris-moi directement par email.";
+
+/**
+ * Traduit un rejet du SDK en message lisible.
+ *
+ * Le SDK rejette sous trois formes différentes, et n'en lire qu'une revenait
+ * à afficher « l'envoi a échoué » pour tout :
+ *   · `EmailJSResponseStatus` ({ status, text }) — réponse HTTP, mais aussi
+ *     le throttle local, qui rend un 429 dont le texte est « Too Many
+ *     Requests » : chercher « limit » dedans ne matchait jamais ;
+ *   · une chaîne brute, levée par sa validation de paramètres ;
+ *   · une Error classique (panne réseau).
+ */
+function describeFailure(err: unknown): string {
+  if (typeof err === "object" && err !== null && "status" in err) {
+    const status = Number((err as { status: unknown }).status);
+    if (status === 429) {
+      return "Doucement — attends une trentaine de secondes avant de renvoyer.";
+    }
+    if (status === 0) {
+      return "Connexion impossible. Vérifie ta connexion et réessaie.";
+    }
+  }
+  return GENERIC_FAILURE;
+}
+
 export default function ContactForm() {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
@@ -56,7 +83,14 @@ export default function ContactForm() {
 
     // Bot détecté : on affiche le même succès qu'un envoi réel pour ne pas
     // lui indiquer que le piège a fonctionné, mais rien n'est envoyé.
+    //
+    // Le champ s'appelait « company » : Chrome le remplissait automatiquement
+    // (c'est un champ « organisation » pour lui, et autocomplete="off" ne
+    // l'arrête pas), ce qui faisait passer de vrais visiteurs pour des bots —
+    // le formulaire affichait « MESSAGE ENVOYÉ » sans rien envoyer. Le nom
+    // actuel ne correspond à aucune heuristique de remplissage automatique.
     if (honeypot.current?.value) {
+      console.warn("[contact] piège à robots déclenché — envoi ignoré.");
       setStatus("sent");
       setValues(EMPTY);
       return;
@@ -95,17 +129,10 @@ export default function ContactForm() {
       setValues(EMPTY);
     } catch (err) {
       setStatus("error");
-      // EmailJS rejette avec un EmailJSResponseStatus ({ status, text }),
-      // pas avec une Error — d'où la lecture défensive.
-      const text =
-        typeof err === "object" && err !== null && "text" in err
-          ? String((err as { text: unknown }).text)
-          : null;
-      setFailure(
-        text?.toLowerCase().includes("limit")
-          ? "Doucement — attends une trentaine de secondes avant de renvoyer."
-          : "L'envoi a échoué. Réessaie, ou écris-moi directement par email.",
-      );
+      setFailure(describeFailure(err));
+      // Le détail brut n'est jamais montré au visiteur, mais il est
+      // indispensable pour diagnostiquer depuis la console.
+      console.error("[contact] échec EmailJS :", err);
     }
   }
 
@@ -150,7 +177,7 @@ export default function ContactForm() {
           <input
             ref={honeypot}
             type="text"
-            name="company"
+            name="bot-field"
             tabIndex={-1}
             autoComplete="off"
             aria-hidden="true"
